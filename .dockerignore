@@ -1,0 +1,8 @@
+build.sh
+deploy.sh
+upload.sh
+.env
+covid.go
+main.go
+go.mod
+go.sum
