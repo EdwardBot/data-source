@@ -8,14 +8,17 @@ import (
 	"log"
 	"math/rand"
 	"net/http"
+	"time"
 )
 
 var (
-	amount = 20
-	memes  []gin.H
+	amount    = 20
+	memes     []gin.H
+	fetchedAt time.Time
 )
 
 func FetchMemes() {
+	fetchedAt = time.Now()
 	memes = make([]gin.H, 0)
 	fetchPart(false, "")
 	for i := 0; i < amount-1; i++ {
@@ -80,6 +83,9 @@ func fetchPart(first bool, after string) {
 }
 
 func GetRandomMeme() gin.H {
+	if time.Now().Sub(fetchedAt).Hours() > 3 {
+		go FetchMemes()
+	}
 	return memes[rand.Intn(len(memes))]
 }
 
@@ -88,5 +94,8 @@ func GetMemeCount() int {
 }
 
 func GetAllMemes() []gin.H {
+	if time.Now().Sub(fetchedAt).Hours() > 3 {
+		go FetchMemes()
+	}
 	return memes
 }

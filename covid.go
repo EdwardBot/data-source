@@ -5,6 +5,8 @@ import (
 	"github.com/gin-gonic/gin"
 	"log"
 	"net/http"
+	"strconv"
+	"strings"
 )
 
 var (
@@ -27,20 +29,19 @@ func InitCovid() {
 		log.Fatalf("Error parsing data!\n%s", err.Error())
 	}
 
-	infP := doc.Find("#api-fertozott-pest").Text()
-	infV := doc.Find("#api-fertozott-videk").Text()
+	infP, _ := strconv.ParseInt(strings.ReplaceAll(doc.Find("#api-fertozott-pest").Text(), " ", ""), 10, 32)
+	infV, _ := strconv.ParseInt(strings.ReplaceAll(doc.Find("#api-fertozott-videk").Text(), " ", ""), 10, 32)
 
-	vacc := doc.Find("#api-beoltottak").Text()
+	vacc, _ := strconv.ParseInt(strings.ReplaceAll(doc.Find("#api-beoltottak").Text(), " ", ""), 10, 32)
 
-	recP := doc.Find("#api-gyogyult-pest").Text()
-	recV := doc.Find("#api-gyogyult-videk").Text()
+	recP, _ := strconv.ParseInt(strings.ReplaceAll(doc.Find("#api-gyogyult-pest").Text(), " ", ""), 10, 32)
+	recV, _ := strconv.ParseInt(strings.ReplaceAll(doc.Find("#api-gyogyult-videk").Text(), " ", ""), 10, 32)
 
-	deadP := doc.Find("#api-elhunyt-pest").Text()
-	deadV := doc.Find("#api-elhunyt-videk").Text()
+	deadP, _ := strconv.ParseInt(strings.ReplaceAll(doc.Find("#api-elhunyt-pest").Text(), " ", ""), 10, 32)
+	deadV, _ := strconv.ParseInt(strings.ReplaceAll(doc.Find("#api-elhunyt-videk").Text(), " ", ""), 10, 32)
 
-	isol := doc.Find("#api-karantenban").Text()
-
-	samp := doc.Find("#api-mintavetel").Text()
+	isol, _ := strconv.ParseInt(strings.ReplaceAll(doc.Find("#api-karantenban").Text(), " ", ""), 10, 32)
+	samp, _ := strconv.ParseInt(strings.ReplaceAll(doc.Find("#api-mintavetel").Text(), " ", ""), 10, 32)
 
 	data = gin.H{
 		"_comment": "Covid data provided by web scraping. https://github.com/EdwardBot/data-source",

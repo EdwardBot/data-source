@@ -11,7 +11,7 @@ func main() {
 	_ = godotenv.Load()
 	r := gin.Default()
 
-	//InitCovid()
+	InitCovid()
 	FetchMemes()
 
 	r.GET("/", func(c *gin.Context) {
