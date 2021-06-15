@@ -3,7 +3,7 @@ Random data collected from various websites and apis.
 
 Currently this is ain't much, but honest work.
 
-###Base url: `https://data.edwardbot.tk`
+### Base url: `https://data.edwardbot.tk`
 ## Routes:
 - `/` Health check route
 - `/covid` Hungarian COVID-19 statistics collected by a web scraper
